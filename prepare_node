@@ -1,0 +1,11 @@
+1) install agent, run: - sudo apt-get install puppet
+2) prepare agent:
+   - edit  /etc/default/puppet START=no => START=yes
+   - start agent, run: sudo /etc/init.d/puppet start
+3) edit /etc/puppet/puppet.conf add:
+   [main]
+        server = MASTER_SERVER_ADDRESS 
+4) register node on puppetmaster, run: puppetd --test --waitforcert 10 --server MASTER_SERVER_ADDRESS
+5) accept registration request on puppetmaster:
+   - list requests, run: puppetca --list
+   - sign client node, run: puppetca --sign CLIENT_SERVER_ADDRESS
