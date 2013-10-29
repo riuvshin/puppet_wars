@@ -1,4 +1,4 @@
-class third-party::jdk::install {
+class third_party::jdk::install {
     file { '/usr/local/jdk1.7.0_17':
         ensure => directory,
         mode => '755',
