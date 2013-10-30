@@ -1,21 +1,24 @@
 class third_party::jdk::install {
-  
-  include third_party::wget::install
+  include wget::install
 
-    file { "/usr/local/jdk1.7.0_17":
-        ensure => "directory",
-        mode => "744",
-        owner => "root",
-        group => "root",
-    }
-    
-   wget::fetch {"download jdk":
-       source => "http://docs.puppetlabs.com/learning/definedtypes.html",
-       destination => "/usr/local/jdk1.7.0_17"
-      }
-      
-   file { "/usr/local/jdk1.7.0_17/jdk-7u17-linux-x64.tar.gz":
-    ensure => present,
-    mode   => 755,
-  }
+  $installRootDir = "/usr/local"
+  $fileName = "jdk-7u17-linux-x64.tar.gz"
+  $url = "http://yum.codenvy-dev.com/archives/jdk-7u17-linux-x64.tar.gz"
+
+  # download jdk
+  wget::authfetch { "download-java-installer":
+    source_url       => "$url",
+    target_directory => "$installRootDir",
+    target_file      => "$fileName",
+    require          => File["$installRootDir"],
+    username         => "protect",
+    password         => "protect"
+  } ->
+  # extract jdk
+  exec { "extract_jdk":
+    cwd     => "$installRootDir",
+    command => "/bin/tar -xvf $fileName",
+  }# ->
+  # delete archive
+  #file { "$installRootDir/$fileName": ensure => absent, }
 }

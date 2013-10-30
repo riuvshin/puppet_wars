@@ -1,4 +1,3 @@
 node "roman-pc" {
-    notify { "TEST FOR MASTER AGENT":
-    }
+  notify { "TEST FOR MASTER AGENT": }
 }
