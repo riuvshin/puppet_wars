@@ -10,7 +10,6 @@ class third_party::jdk::install {
     source_url       => "$url",
     target_directory => "$installRootDir",
     target_file      => "$fileName",
-    require          => File["$installRootDir"],
     username         => "protect",
     password         => "protect"
   } ->
@@ -18,7 +17,5 @@ class third_party::jdk::install {
   exec { "extract_jdk":
     cwd     => "$installRootDir",
     command => "/bin/tar -xvf $fileName",
-  }# ->
-  # delete archive
-  #file { "$installRootDir/$fileName": ensure => absent, }
+  }
 }
