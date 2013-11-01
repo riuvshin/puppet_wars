@@ -1,3 +1,3 @@
-node "git.codenvy.com" {
+node "git.codenvy-stg.com" {
   include third_party::git::install
 }
