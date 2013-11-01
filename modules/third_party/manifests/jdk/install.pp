@@ -6,8 +6,9 @@ class third_party::jdk::install {
   $url = "http://yum.codenvy-dev.com/archives/jdk-7u17-linux-x64.tar.gz"
 
   exec {"init_download":
+    path => "/usr/bin",
     cwd => "$installRootDir",
-    onlyif => "test ! -f $installRootDir/$fileName"
+    onlyif => "/usr/bin/test ! -f $installRootDir/$fileName"
   } ->
   # download jdk
   wget::authfetch { "download-java-installer":
