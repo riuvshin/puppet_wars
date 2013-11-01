@@ -1,10 +1,12 @@
 class codenvy_user {
+  group { "cl-server": ensure => "present", }
+
   user { 'cl-server':
     ensure     => 'present',
     home       => '/home/cl-server',
     shell      => '/bin/bash',
     managehome => true,
-    password   => "UQKm4Lo8xfnKs", #CodenvySuperSecret123321
+    password   => "UQKm4Lo8xfnKs", # CodenvySuperSecret123321
     groups     => ['cl-server'],
   }
 
