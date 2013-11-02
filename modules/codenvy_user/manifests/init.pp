@@ -1,5 +1,5 @@
 class codenvy_user {
-  group { $codenvy_user: ensure => "present", }
+  group { $codenvy_groups: ensure => "present", }
 
   user { $codenvy_user:
     ensure     => 'present',
@@ -14,6 +14,6 @@ class codenvy_user {
     ensure => directory,
     mode   => 700,
     owner  => $codenvy_user,
-    group  => $codenvy_user,
+    group  => $codenvy_groups,
   }
 }
