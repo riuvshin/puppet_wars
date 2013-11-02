@@ -1,10 +1,10 @@
 class git_instance::prepare_git_instance {
   # prepage .bashrc
-  file { "/home/node4/.bashrc":
+  file { "/home/$codenvy_user/.bashrc":
     ensure  => "present",
     content => template("git_instance/git_instance_bashrc.erb"),
-    owner   => "node4",
-    group   => "node4",
+    owner   => $codenvy_user,
+    group   => $codenvy_user,
     mode    => 644,
   }
 }

@@ -1,19 +1,19 @@
 class codenvy_user {
-  group { "cl-server": ensure => "present", }
+  group { $codenvy_user: ensure => "present", }
 
-  user { 'cl-server':
+  user { $codenvy_user:
     ensure     => 'present',
-    home       => '/home/cl-server',
+    home       => '/home/$::codenvy_user',
     shell      => '/bin/bash',
     managehome => true,
     password   => "UQKm4Lo8xfnKs", # CodenvySuperSecret123321
-    groups     => ['cl-server'],
+    groups     => $codenvy_groups,
   }
 
-  file { "/home/cl-server/.ssh":
+  file { "/home/$codenvy_user/.ssh":
     ensure => directory,
     mode   => 700,
-    owner  => "cl-server",
-    group  => "cl-server",
+    owner  => $codenvy_user,
+    group  => $codenvy_user,
   }
 }

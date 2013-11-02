@@ -2,16 +2,16 @@ class third_party::jdk::install {
   include wget::install
 
   $installRootDir = "/usr/local"
-  $fileName = "jdk-7u17-linux-x64.tar.gz"
-  $url = "http://yum.codenvy-dev.com/archives/jdk-7u17-linux-x64.tar.gz"
+  $fileName = "jdk.tar.gz"
+  $url = $::jdk_url
 
   # download jdk
   wget::authfetch { "download-java-installer":
     source_url       => "$url",
     target_directory => "$installRootDir",
     target_file      => "$fileName",
-    username         => "protect",
-    password         => "protect"
+    username         => $username_for_downloads,
+    password         => $pass_for_downloads 
   } ->
   # extract jdk
   exec { "extract_jdk":
