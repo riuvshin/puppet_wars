@@ -3,7 +3,7 @@ class codenvy_user {
 
   user { $codenvy_user:
     ensure     => 'present',
-    home       => '/home/$::codenvy_user',
+    home       => '/home/$codenvy_user',
     shell      => '/bin/bash',
     managehome => true,
     password   => "UQKm4Lo8xfnKs", # CodenvySuperSecret123321
