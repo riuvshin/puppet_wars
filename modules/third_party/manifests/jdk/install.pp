@@ -1,12 +1,11 @@
 class third_party::jdk::install {
-  include wget::install
-
+  
   $installRootDir = "/usr/local"
   $fileName = "jdk.tar.gz"
   $url = $::jdk_url
 
   # download jdk
-  wget::authfetch { "download-java-installer":
+  wget::authfetch { "download-jdk":
     source_url       => "$url",
     target_directory => "$installRootDir",
     target_file      => "$fileName",

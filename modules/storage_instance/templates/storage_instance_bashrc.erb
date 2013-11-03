@@ -4,22 +4,21 @@ if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
 # User specific aliases and functions
-unset CATALINA_PID JAVA_HOME JAVA_OPTS EXO_TENANT_DATA_DIR TENANT_MASTERHOST TENANT_REPOSITORY EXO_DB_CONF_DIR CATALINA_OPTS
- 
+unset CATALINA_PID JAVA_HOME JAVA_OPTS CATALINA_OPTS BUILD_SERVER_BASE_URL CODENVY_LOCAL_CONF_DIR CODENVY_LOGS_DIR CODENVY_DATA_DIR
+ulimit -n 100000
+ulimit -u 16384
  
 JMX0="-Dcom.sun.management.jmxremote=true"
-JMX1="-Djava.rmi.server.hostname=54.226.179.109"
+JMX1="-Djava.rmi.server.hostname=23.23.184.86"
 JMX2="-Dcom.sun.management.jmxremote.authenticate=true"
 JMX3="-Dcom.sun.management.jmxremote.password.file=${HOME}/jmxremote.password"
 JMX4="-Dcom.sun.management.jmxremote.access.file=${HOME}/jmxremote.access"
 JMX5="-Dcom.sun.management.jmxremote.ssl=false"
 JAVA_HOME="/usr/local/jdk1.7.0_17"
 CATALINA_PID="${HOME}/${USER}.pid"
-CATALINA_OPTS="$JMX0 $JMX1"
+CATALINA_OPTS="$JMX0 $JMX1 $JMX2 $JMX3 $JMX4 $JMX5"
+CODENVY_LOCAL_CONF_DIR=/home/cl-server/data/conf
+CODENVY_LOGS_DIR=/home/cl-server/data/logs
+CODENVY_DATA_DIR=/home/cl-server/data/index
 PATH=${JAVA_HOME}/bin:${JAVA_HOME}/jre/bin:$PATH:$HOME/bin:$HOME/.local/bin
-JAVA_OPTS="${JMX0} ${JMX1} ${JMX2} ${JMX3} ${JMX4} ${JMX5} ${JAVA_OPTS}"
-CODENVY_LOGS_DIR="/home/cl-server/cl-data/logs"
-CODENVY_DATA_DIR="/home/cl-server/cl-data/data"
-CODENVY_LOCAL_CONF_DIR="/home/cl-server/cl-data/conf/"
-export PATH CATALINA_PID JAVA_HOME JAVA_OPTS
-export CODENVY_LOGS_DIR CODENVY_DATA_DIR CODENVY_LOCAL_CONF_DIR
+export PATH CATALINA_PID JAVA_HOME JAVA_OPTS CATALINA_OPTS CODENVY_LOCAL_CONF_DIR CODENVY_LOGS_DIR CODENVY_DATA_DIR
