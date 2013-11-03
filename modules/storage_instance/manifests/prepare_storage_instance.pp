@@ -41,7 +41,7 @@ class storage_instance::prepare_storage_instance {
 
   # start codeassistant tomcat
   exec { "start-codeassistant-tomcat":
-#    unless  => "test -d /proc/`cat ~/$codenvy_user.pid`"
+    unless  => "test -d /proc/`pgrep -f java`",
     user    => $codenvy_user,
     cwd => "$codeassistant_directory/bin/",
     command => "sh catalina.sh start"
