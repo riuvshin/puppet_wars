@@ -34,6 +34,7 @@ class storage_instance::prepare_storage_instance {
   exec { "extract-codeassistant-tomcat":
     cwd     => $codeassistant_directory,
     command => "unzip $codeassistant_file_name",
+    user => $codenvy_user,
     onlyif  => "test ! -d $codeassistant_directory/bin"
-  }
+  }  
 }
