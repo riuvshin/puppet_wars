@@ -29,18 +29,20 @@ class storage_instance::prepare_storage_instance {
     target_file      => $codeassistant_file_name,
     username         => $codenvy_maven_username,
     password         => $codenvy_maven_password
-  }
+  } ->
 
   # extract codeassistant tomcat
   exec { "extract-codeassistant-tomcat":
     cwd     => $codeassistant_directory,
     command => "unzip $codeassistant_file_name",
     user    => $codenvy_user,
+    require => "",
     onlyif  => "test ! -d $codeassistant_directory/bin"
-  }
+  } ->
 
   # start codeassistant tomcat
-  exec { "$codeassistant_directory/bin/catalina.sh start":
-    unless  => "test -d /proc/`cat ~/$codenvy_user.pid`"
+  exec { "start-codeassistant-tomcat":
+#    unless  => "test -d /proc/`cat ~/$codenvy_user.pid`"
+    command => "$codeassistant_directory/bin/catalina.sh start"
   }
 }
