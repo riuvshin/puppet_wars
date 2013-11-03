@@ -15,7 +15,7 @@ class third_party::jdk::install {
   # extract jdk
   exec { "extract_jdk":
     cwd     => "$installRootDir",
-    command => "/bin/tar -xvf $fileName",
-    onlyif => "/usr/bin/test ! -d $installRootDir/jdk1.7.0_17"
+    command => "tar -xvf $fileName",
+    onlyif => "test ! -d $installRootDir/jdk1.7.0_17"
   }
 }

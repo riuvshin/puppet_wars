@@ -33,7 +33,7 @@ class storage_instance::prepare_storage_instance {
   # extract codeassistant tomcat
   exec { "extract-codeassistant-tomcat":
     cwd     => $codeassistant_directory,
-    command => "/bin/unzip $codeassistant_file_name",
-    onlyif  => "/usr/bin/test ! -d $codeassistant_directory/bin"
+    command => "unzip $codeassistant_file_name",
+    onlyif  => "test ! -d $codeassistant_directory/bin"
   }
 }
