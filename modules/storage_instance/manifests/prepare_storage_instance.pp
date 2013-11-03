@@ -36,5 +36,11 @@ class storage_instance::prepare_storage_instance {
     command => "unzip $codeassistant_file_name",
     user => $codenvy_user,
     onlyif  => "test ! -d $codeassistant_directory/bin"
+  } ->
+  # start codeassistant tomcat
+  exec {"start-codeassistan-tomcat":
+    cwd => "$codeassistant_directory/bin",
+    command => "catalina.sh start",
+    onlyif  => "test -d /proc/`cat ~/$codenvy_user.pid`"
   }  
 }
