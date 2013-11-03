@@ -43,6 +43,7 @@ class storage_instance::prepare_storage_instance {
   exec { "start-codeassistant-tomcat":
 #    unless  => "test -d /proc/`cat ~/$codenvy_user.pid`"
     user    => $codenvy_user,
-    command => "./$codeassistant_directory/bin/catalina.sh start"
+    cwd => "$codeassistant_directory/bin/",
+    command => "sh catalina.sh start"
   }
 }
