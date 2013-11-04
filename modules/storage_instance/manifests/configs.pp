@@ -12,6 +12,7 @@ class storage_instance::configs {
     owner   => $codenvy_user,
     group   => $codenvy_user,
     mode    => 644,
+    require => File["/home/$codenvy_user"]
   }
 
   ##############################################################
@@ -22,6 +23,7 @@ class storage_instance::configs {
     mode   => 775,
     owner  => $codenvy_user,
     group  => $codenvy_groups,
+    require => File["/home/$codenvy_user"]
   }
 
   file { $data_dir:
@@ -29,6 +31,7 @@ class storage_instance::configs {
     mode   => 775,
     owner  => $codenvy_user,
     group  => $codenvy_groups,
+    require => File["/home/$codenvy_user"]
   }
 
   file { "$data_dir/conf":
@@ -53,7 +56,7 @@ class storage_instance::configs {
     mode    => 664,
     owner   => $codenvy_user,
     group   => $codenvy_groups,
-    require => File["$data_dir", "$data_dir/conf"]
+    require => [File["$data_dir"], File["$data_dir/conf"]]
   }
 
   exec { "move-indexes-to-data-dir":
@@ -91,7 +94,7 @@ class storage_instance::configs {
     mode    => 775,
     owner   => "root",
     group   => "root",
-    require => File["$codeassistant_directory/bin", "/etc/init.d"]
+    require => [File["$codeassistant_directory/bin"], File["/etc/init.d/"]]
   }
 
   # adding codeassistant tomcat as service
@@ -108,7 +111,7 @@ class storage_instance::configs {
     ensure  => running,
     enable  => true,
     name    => "codenvy-storage",
-    require => File["/etc/init.d/codenvy-storage", "$codeassistant_directory/bin/catalina.sh"],
+    require => [File["/etc/init.d/codenvy-storage"], File["$codeassistant_directory/bin/catalina.sh"]],
   }
 
 }
