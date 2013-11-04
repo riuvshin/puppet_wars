@@ -12,26 +12,26 @@ class storage_instance::configs {
     owner   => $codenvy_user,
     group   => $codenvy_user,
     mode    => 644,
-    require => File["/home/$codenvy_user"]
+    require => Class["codenvy_user"]
   }
 
   ##############################################################
   # Creating folders and preparing configs
   ##############################################################
   file { $codeassistant_directory:
-    ensure => directory,
-    mode   => 775,
-    owner  => $codenvy_user,
-    group  => $codenvy_groups,
-    require => File["/home/$codenvy_user"]
+    ensure  => directory,
+    mode    => 775,
+    owner   => $codenvy_user,
+    group   => $codenvy_groups,
+    require => Class["codenvy_user"]
   }
 
   file { $data_dir:
-    ensure => directory,
-    mode   => 775,
-    owner  => $codenvy_user,
-    group  => $codenvy_groups,
-    require => File["/home/$codenvy_user"]
+    ensure  => directory,
+    mode    => 775,
+    owner   => $codenvy_user,
+    group   => $codenvy_groups,
+    require => Class["codenvy_user"]
   }
 
   file { "$data_dir/conf":
@@ -59,13 +59,6 @@ class storage_instance::configs {
     require => [File["$data_dir"], File["$data_dir/conf"]]
   }
 
-  exec { "move-indexes-to-data-dir":
-    cwd     => $codeassistant_directory,
-    command => "mv $codeassistant_directory/ide-codeassistant-lucene-index $data_dir/index",
-    user    => $codenvy_user,
-    creates => "$data_dir/index"
-  }
-
   ##############################################################
   # Downloading codeassistant tomcat and installing as service
   ##############################################################
@@ -77,14 +70,21 @@ class storage_instance::configs {
     target_file      => $codeassistant_file_name,
     username         => $codenvy_maven_username,
     password         => $codenvy_maven_password
-  }
-
+  } ->
   # extract codeassistant tomcat
   exec { "extract-codeassistant-tomcat":
     cwd     => $codeassistant_directory,
     command => "unzip $codeassistant_file_name",
     user    => $codenvy_user,
     onlyif  => "test ! -d $codeassistant_directory/bin"
+  }
+
+  exec { "move-indexes-to-data-dir":
+    cwd     => $codeassistant_directory,
+    command => "mv $codeassistant_directory/ide-codeassistant-lucene-index $data_dir/index",
+    user    => $codenvy_user,
+    creates => "$data_dir/index",
+    require => [Exec["extract-codeassistant-tomcat"], File["$data_dir"]]
   }
 
   # prepare codeassistant tomcat service
@@ -94,7 +94,6 @@ class storage_instance::configs {
     mode    => 775,
     owner   => "root",
     group   => "root",
-    require => [File["$codeassistant_directory/bin"], File["/etc/init.d/"]]
   }
 
   # adding codeassistant tomcat as service
@@ -111,7 +110,10 @@ class storage_instance::configs {
     ensure  => running,
     enable  => true,
     name    => "codenvy-storage",
-    require => [File["/etc/init.d/codenvy-storage"], File["$codeassistant_directory/bin/catalina.sh"]],
+    require => [
+      File["/etc/init.d/codenvy-storage"],
+      Exec["extract-codeassistant-tomcat"],
+      Exec["register-codeassistant-tomcat-service"]],
   }
 
 }
