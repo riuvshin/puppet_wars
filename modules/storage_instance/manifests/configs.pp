@@ -105,7 +105,7 @@ class storage_instance::configs {
     user    => root;
   }
 
-  # System Service
+  # running codenvy-storage service
   service { "codenvy-storage":
     ensure  => running,
     enable  => true,
