@@ -56,6 +56,13 @@ class storage_instance::configs {
     require => File["$data_dir", "$data_dir/conf"]
   }
 
+  exec { "move-indexes-to-data-dir":
+    cwd     => $codeassistant_directory,
+    command => "mv $codeassistant_directory/ide-codeassistant-lucene-index $data_dir/index",
+    user    => $codenvy_user,
+    creates => "$data_dir/index"
+  }
+
   ##############################################################
   # Downloading codeassistant tomcat and installing as service
   ##############################################################
