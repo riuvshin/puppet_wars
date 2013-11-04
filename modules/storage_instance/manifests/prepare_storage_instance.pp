@@ -30,7 +30,6 @@ class storage_instance::prepare_storage_instance {
     username         => $codenvy_maven_username,
     password         => $codenvy_maven_password
   } ->
-
   # extract codeassistant tomcat
   exec { "extract-codeassistant-tomcat":
     cwd     => $codeassistant_directory,
@@ -38,12 +37,21 @@ class storage_instance::prepare_storage_instance {
     user    => $codenvy_user,
     onlyif  => "test ! -d $codeassistant_directory/bin"
   } ->
-
-  # start codeassistant tomcat
-  exec { "start-codeassistant-tomcat":
-    unless  => "test -d /proc/`pgrep -f java`",
-    user    => $codenvy_user,
-    cwd => "$codeassistant_directory/bin/",
-    command => "sh catalina.sh start"
+  # prepare codeassistant tomcat service
+  file { "/etc/init.d/codenvy-storage":
+    ensure  => "present",
+    content => template("storage_instance/codenvy-storage.erb"),
+    mode    => 775,
+    owner   => "root",
+    group   => "root"
+  } ->
+  # adding codeassistant tomcat as service
+  exec { "register-codeassistant-tomcat-service":
+    command => "chkconfig --add codenvy-storage",
+    unless  => "chkconfig --list &> /dev/stdout | grep \"codenvy-storage\"",
+    cwd     => '/etc/init.d',
+    require => File["/etc/init.d/codenvy-storage"],
+    user    => root;
   }
+  #
 }
