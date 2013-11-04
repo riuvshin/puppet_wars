@@ -19,14 +19,14 @@ APP_DIR="/home/cl-server"
 
 start () {
 # Starting tomcat
- echo "Starting tomcat..." >>$LOG
+ echo "Starting tomcat..."
  su - cl-server -c "$APP_DIR/codeassistant/bin/catalina.sh start"
  exit 0
  }
  
  stop () {
 # Stoping tomcat
- echo "Preparation - ok. Stoping tomcat..." >>$LOG
+ echo "Preparation - ok. Stoping tomcat..."
  su - cl-server -c "$APP_DIR/codeassistant/bin/catalina.sh stop -force"
  
 if [ -f $APP_DIR/cl-server.pid ]
