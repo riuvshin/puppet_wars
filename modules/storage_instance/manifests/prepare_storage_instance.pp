@@ -52,6 +52,12 @@ class storage_instance::prepare_storage_instance {
     cwd     => '/etc/init.d',
     require => File["/etc/init.d/codenvy-storage"],
     user    => root;
+  } ->
+  # System Service
+  service { "codenvy-storage":
+    ensure  => running,
+    enable  => true,
+    name    => "codenvy-storage",
+    require => File["/etc/init.d/codenvy-storage", "$codeassistant_directory/bin"],
   }
-  #
 }
