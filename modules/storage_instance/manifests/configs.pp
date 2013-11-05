@@ -130,6 +130,8 @@ class storage_instance::configs {
     ensure  => running,
     enable  => true,
     name    => "codenvy-storage",
+    hasrestart => true,
+    hasstatus => false,
     require => [
       File["/etc/init.d/codenvy-storage"],
       Exec["extract-codeassistant-tomcat"],
