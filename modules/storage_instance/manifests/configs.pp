@@ -58,6 +58,26 @@ class storage_instance::configs {
     group   => $codenvy_groups,
     require => [File["$data_dir"], File["$data_dir/conf"]]
   }
+  
+  # JMX configurations
+
+  file { "/home/$codenvy_user/jmxremote.password":
+    ensure  => "present",
+    mode    => 664,
+    owner   => $codenvy_user,
+    group   => $codenvy_groups,
+    content => "admin admin",
+    require => File["/home/$codenvy_user/.bashrc"]
+  }
+
+  file { "/home/$codenvy_user/jmxremote.access":
+    ensure  => "present",
+    mode    => 664,
+    owner   => $codenvy_user,
+    group   => $codenvy_groups,
+    content => "admin readwrite",
+    require => File["/home/$codenvy_user/.bashrc"]
+  }
 
   ##############################################################
   # Downloading codeassistant tomcat and installing as service
