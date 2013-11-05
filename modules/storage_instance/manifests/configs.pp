@@ -133,7 +133,10 @@ class storage_instance::configs {
     hasrestart => true,
     hasstatus => true,
     require => [
+      Class["codenvy_user"],
+      Class["third_party::jdk::install"],
       File["/etc/init.d/codenvy-storage"],
+      File["/home/$codenvy_user/.bashrc"],
       Exec["extract-codeassistant-tomcat"],
       Exec["register-codeassistant-tomcat-service"]],
   }
