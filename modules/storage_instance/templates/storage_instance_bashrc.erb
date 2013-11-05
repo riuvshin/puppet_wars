@@ -5,8 +5,6 @@ if [ -f /etc/bashrc ]; then
 fi
 # User specific aliases and functions
 unset CATALINA_PID JAVA_HOME JAVA_OPTS CATALINA_OPTS BUILD_SERVER_BASE_URL CODENVY_LOCAL_CONF_DIR CODENVY_LOGS_DIR CODENVY_DATA_DIR
-ulimit -n 100000
-ulimit -u 16384
  
 JMX0="-Dcom.sun.management.jmxremote=true"
 JMX1="-Djava.rmi.server.hostname=23.23.184.86"

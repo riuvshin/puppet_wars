@@ -30,9 +30,9 @@
         <SMTPHost>localhost</SMTPHost>
         <SMTPPort>25</SMTPPort>
         <SSL>false</SSL>
-        <to>prod-reports@codenvy.com</to>
-        <from>noreply@codenvy.com</from>
-        <subject>Storage production error: %logger{20} - %m</subject>
+        <to>stg-reports@codenvy.com</to>
+        <from>stg-reports@codenvy.com</from>
+        <subject>Storage puppet error: %logger{20} - %m</subject>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>%-41(%date[%.15thread]) %-45([%-5level] [%.30logger{30} %L]) - %msg%n</pattern>
         </layout>
