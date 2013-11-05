@@ -38,7 +38,12 @@ exit 0
 }
 
 status () {
-exit 0
+    numproc=`ps -ef | grep catalina | grep -v "grep catalina" | wc -l`
+    if [ $numproc -gt 0 ]; then
+       echo "Tomcat is running..."
+    else
+       echo "Tomcat is stopped..."
+    fi
 }
 
 # See how we were called.
