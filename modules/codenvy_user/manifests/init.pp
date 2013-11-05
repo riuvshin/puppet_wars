@@ -12,7 +12,8 @@ class codenvy_user {
     password   => "UQKm4Lo8xfnKs", # CodenvySuperSecret123321
     groups     => $codenvy_groups,
     uid        => "5001",
-    gid        => "5001"
+    gid        => "5001",
+    require => Group["$codenvy_groups"]
   }
 
   file { "/home/$codenvy_user/.ssh":
@@ -20,5 +21,6 @@ class codenvy_user {
     mode   => 700,
     owner  => $codenvy_user,
     group  => $codenvy_groups,
+    require => User["$codenvy_user"]
   }
 }
