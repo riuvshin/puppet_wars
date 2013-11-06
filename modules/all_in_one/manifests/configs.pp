@@ -1,4 +1,6 @@
 class all_in_one::configs {
+  
+  $ip = ""
   ##############################################################
   # Creating codenvy.conf
   ##############################################################
@@ -9,4 +11,13 @@ class all_in_one::configs {
     group   => root,
     mode    => 644,
   }
+  
+  exec {"get_ip":
+    command => "$ip = ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
+  }
+  
+  notify { "$ip":
+    require => [Exec["get_ip"]]
+  }
+  
 }
