@@ -1,6 +1,6 @@
 HOST_NAME=your.host.name
-HOST_IP=172.11.22.33
-TESTER_URL=http://your_runner_host
+HOST_IP=<%= scope.lookupvar('site::host_ip') %>
+TESTER_URL=<%= scope.lookupvar('site::runner_host') %>
 TESTER_LOGIN=your_runner_login
 TESTER_PWD=your_login_passwd
 GITHUB_CLIENT_ID=your.github.id
