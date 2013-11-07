@@ -33,5 +33,3 @@ $codenvy_maven_password = ""
 ##############################################
 $codenvy_yum_repo_login = "protect"
 $codenvy_yum_repo_pass = "123qwe"
-$host_ip = "192.168.25.129"
-$runner_host = "http://my-runner.com"
