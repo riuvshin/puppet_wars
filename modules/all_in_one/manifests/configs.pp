@@ -40,7 +40,12 @@ class all_in_one::configs {
 
   package { "cloud-ide-packaging-tomcat-codenvy-allinone-rpm":
     ensure  => "latest",
-    require => [File["/etc/codenvy.conf"], File["/etc/yum.repos.d/Codenvy.repo"], File["/etc/sysconfig/iptables"]],
+    require => [
+      File["/etc/codenvy.conf"],
+      File["/etc/yum.repos.d/Codenvy.repo"],
+      File["/etc/sysconfig/iptables"],
+      Class["third_party::jdk::install"],
+      Class["include third_party::maven::install"]],
   }
 
 }
