@@ -45,7 +45,7 @@ class all_in_one::configs {
       File["/etc/yum.repos.d/Codenvy.repo"],
       File["/etc/sysconfig/iptables"],
       Class["third_party::jdk::install"],
-      Class["include third_party::maven::install"]],
+      Class["third_party::maven::install"]],
   }
 
 }
