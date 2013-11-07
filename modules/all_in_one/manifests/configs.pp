@@ -21,18 +21,20 @@ class all_in_one::configs {
     mode    => 644,
   }
 
-  service { "iptables":
-    ensure => "running",
-    enable => true,
-  }
-
   # changing iptables
   file { "/etc/sysconfig/iptables":
-    notify  => Service["iptables"],
     ensure  => "present",
     content => template("all_in_one/iptables.erb"),
     owner   => root,
     group   => root,
     mode    => 600,
   }
+
+  service { "iptables":
+    ensure     => running,
+    enable     => true,
+    hasrestart => true,
+    subscribe  => File["/etc/sysconfig/iptables"]
+  }
+
 }
