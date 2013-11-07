@@ -33,8 +33,14 @@ class all_in_one::configs {
   service { "iptables":
     ensure     => running,
     enable     => true,
+    hasstatus  => true,
     hasrestart => true,
     subscribe  => File["/etc/sysconfig/iptables"]
+  }
+
+  package { "cloud-ide-packaging-tomcat-codenvy-allinone-rpm":
+    ensure  => "installed",
+    require => [File["/etc/codenvy.conf"], File["/etc/yum.repos.d/Codenvy.repo"], File["/etc/sysconfig/iptables"]],
   }
 
 }
