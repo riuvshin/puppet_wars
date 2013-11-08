@@ -41,7 +41,7 @@ status () {
 if [ -f $APP_DIR/cl-server.pid ]
     then
         pid=`cat $APP_DIR/cl-server.pid`
-        numproc=`ps -ef | grep $pid | grep -v "grep" | wc -l`
+        numproc=`ps -efa | grep $pid | grep -v "grep" | wc -l`
         if [ $numproc -gt 0 ]; then
             echo "Tomcat is running..."
         else
