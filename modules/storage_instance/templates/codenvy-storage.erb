@@ -38,23 +38,7 @@ exit 0
 }
 
 status () {
-if [ -f $APP_DIR/cl-server.pid ]
-    then
-        pid=`cat $APP_DIR/cl-server.pid`
-    else
-        pid="NOT_EXIST"
-fi
-
-   numproc=`ps -ef | grep $pid | grep -v "grep" | wc -l`
-    if [ $numproc -gt 0 ]; then
-       echo "Tomcat is running..."
-       echo "pid: $pid"
-       return 1
-    else
-       echo "Tomcat is stopped..."
-       echo "pid: $pid"
-       return 0
-    fi    
+	ps -fp `cat $APP_DIR/cl-server.pid`
 }
 
 # See how we were called.
