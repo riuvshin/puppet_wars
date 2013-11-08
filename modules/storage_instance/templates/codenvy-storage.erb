@@ -38,11 +38,20 @@ exit 0
 }
 
 status () {
-    numproc=`ps -ef | grep catalina | grep -v "grep catalina" | wc -l`
+if [ -f $APP_DIR/cl-server.pid ]
+    then
+        pid=`cat $APP_DIR/cl-server.pid`
+    else
+        pid="NOT_EXIST"
+fi
+
+   numproc=`ps -ef | grep $pid | grep -v "grep" | wc -l`
     if [ $numproc -gt 0 ]; then
        echo "Tomcat is running..."
+       echo "pid: $pid"
     else
        echo "Tomcat is stopped..."
+       echo "pid: $pid"
     fi
 }
 
