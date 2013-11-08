@@ -132,6 +132,7 @@ class storage_instance::configs {
     name    => "codenvy-storage",
     hasrestart => true,
     hasstatus => true,
+    subscribe  => File["/etc/init.d/codenvy-storage"],
     require => [
       Class["codenvy_user"],
       Class["third_party::jdk::install"],

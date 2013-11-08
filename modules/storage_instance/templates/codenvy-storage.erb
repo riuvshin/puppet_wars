@@ -41,18 +41,15 @@ status () {
 if [ -f $APP_DIR/cl-server.pid ]
     then
         pid=`cat $APP_DIR/cl-server.pid`
+        numproc=`ps -ef | grep $pid | grep -v "grep" | wc -l`
+        if [ $numproc -gt 0 ]; then
+            echo "Tomcat is running..."
+        else
+            echo "Tomcat is stopped..."
+        fi
     else
-        pid="NOT_EXIST"
+            echo "Tomcat is stopped..."
 fi
-
-   numproc=`ps -ef | grep $pid | grep -v "grep" | wc -l`
-    if [ $numproc -gt 0 ]; then
-       echo "Tomcat is running..."
-       echo "pid: $pid"
-    else
-       echo "Tomcat is stopped..."
-       echo "pid: $pid"
-    fi
 }
 
 # See how we were called.
