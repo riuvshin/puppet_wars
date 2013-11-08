@@ -16,6 +16,7 @@
 ### END INIT INFO
 
 APP_DIR="/home/cl-server"
+RETVAL=0
 
 start () {
 # Starting tomcat
@@ -38,7 +39,15 @@ exit 0
 }
 
 status () {
-	ps -fp `cat $APP_DIR/cl-server.pid`
+	if [ -f $APP_DIR/cl-server.pid ]
+	    then
+	        pid=`cat $APP_DIR/cl-server.pid`
+			ps -fp $pid
+			RETVAL=$?        
+	    else
+	     	RETVAL=3
+	fi
+	return $RETVAL
 }
 
 # See how we were called.
