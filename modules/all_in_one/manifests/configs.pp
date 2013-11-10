@@ -1,5 +1,4 @@
 class all_in_one::configs {
-
   ##############################################################
   # Creating codenvy.conf
   ##############################################################
@@ -37,6 +36,8 @@ class all_in_one::configs {
     subscribe  => File["/etc/sysconfig/iptables"]
   }
 
+  package { "postfix": ensure => "installed", }
+
   package { "cloud-ide-packaging-tomcat-codenvy-allinone-rpm":
     ensure  => "latest",
     require => [
@@ -46,10 +47,6 @@ class all_in_one::configs {
       Class["third_party::jdk::install"],
       Class["third_party::maven::install"],
       Package["postfix"]],
-  }
-  
-  package {"postfix":
-    ensure  => "installed",
   }
 
 }

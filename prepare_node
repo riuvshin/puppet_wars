@@ -9,3 +9,16 @@
 5) accept registration request on puppetmaster:
    - list requests, run: puppetca --list
    - sign client node, run: puppetca --sign CLIENT_SERVER_ADDRESS
+
+
+make sure that ports are open
+
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 8140 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 61613 -j ACCEPT
+
+service restart iptables
+
+
+hostname <EXPECTED_DNS>
+
