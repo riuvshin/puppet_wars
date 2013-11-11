@@ -15,7 +15,7 @@ node "common_aio" {
 
 node "puppet-node1.codenvy-stg.com" inherits "common_aio" {
   $aio_host_url = "puppet-node1.codenvy-stg.com"
-  $aio_runner_url = "http://api.javarun2.exoplatform.com"
+  $aio_runner_url = "http://api.apprun.codenvy-stg.com"
   $aio_runner_uname = "support@codenvy.com"
   $aio_runner_pass = "eXoAdmin12321"
   $aio_github_client_id = "c92ca26f91c6eb9234a3"
@@ -28,7 +28,7 @@ node "puppet-node1.codenvy-stg.com" inherits "common_aio" {
 
 node "aio.codenvy.com" inherits "common_aio" {
   $aio_host_url = "puppet-node1.codenvy-stg.com"
-  $aio_runner_url = "http://api.javarun2.exoplatform.com"
+  $aio_runner_url = "http://api.apprun.codenvy-stg.com"
   $aio_runner_uname = "support@codenvy.com"
   $aio_runner_pass = "eXoAdmin12321"
   $aio_github_client_id = "c92ca26f91c6eb9234a3"
