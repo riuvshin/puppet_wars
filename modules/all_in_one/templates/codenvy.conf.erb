@@ -1,11 +1,11 @@
-HOST_NAME=puppet-node1.codenvy-stg.com
+HOST_NAME=<%= scope.lookupvar('::aio_host_url') %>
 HOST_IP=<%= ipaddress %>
-TESTER_URL=http://api.javarun2.exoplatform.com
-TESTER_LOGIN=your_runner_login
-TESTER_PWD=your_login_passwd
-GITHUB_CLIENT_ID=your.github.id
-GITHUB_CLIENT_SECRET=your.github.id.secret
-GOOGLE_CLIENT_ID=your.google.id
-GOOGLE_CLIENT_SECRET=your.google.id.secret
-WSO2_CLIENT_ID=your.wso2.id
-WSO2_SECRET=your.wso2.id.secret
+TESTER_URL=<%= scope.lookupvar('::aio_runner_url') %>
+TESTER_LOGIN=<%= scope.lookupvar('::aio_runner_uname') %>
+TESTER_PWD=<%= scope.lookupvar('::aio_runner_pass') %>
+GITHUB_CLIENT_ID=<%= scope.lookupvar('::aio_github_client_id') %>
+GITHUB_CLIENT_SECRET=<%= scope.lookupvar('::aio_github_secret') %>
+GOOGLE_CLIENT_ID=<%= scope.lookupvar('::aio_google_client_id') %>
+GOOGLE_CLIENT_SECRET=<%= scope.lookupvar('::aio_google_secret') %>
+WSO2_CLIENT_ID=<%= scope.lookupvar('::aio_wso2_client_id') %>
+WSO2_SECRET=<%= scope.lookupvar('::aio_wso2_secret') %>
