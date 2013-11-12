@@ -14,7 +14,7 @@ node "puppet-node1.codenvy-stg.com" {
 }
 
 node "aio.codenvy.com" {
-  $aio_host_url = "puppet-node1.codenvy-stg.com"
+  $aio_host_url = "aio.codenvy.com"
   $aio_runner_url = "http://api.apprun.codenvy-stg.com"
   $aio_runner_uname = "support@codenvy.com"
   $aio_runner_pass = "eXoAdmin12321"
