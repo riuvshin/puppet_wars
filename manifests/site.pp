@@ -25,11 +25,3 @@ $pass_for_downloads = "protect"
 # CODENVY NEXUS
 $codenvy_maven_username = "riuvshin"
 $codenvy_maven_password = ""
-
-
-
-##############################################
-# A I O
-##############################################
-$codenvy_yum_repo_login = "protect"
-$codenvy_yum_repo_pass = "123qwe"
