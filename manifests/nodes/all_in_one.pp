@@ -26,5 +26,3 @@ node "aio.codenvy.com" {
   $aio_wso2_secret = "FAKE2"
   include all_in_one::prepare_aio_instance
 }
-
-
