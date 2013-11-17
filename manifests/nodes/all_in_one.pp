@@ -1,5 +1,8 @@
+node "aio_common" {
+  include all_in_one::prepare_aio_instance
+}
 
-node "puppet-node1.codenvy-stg.com" {
+node "puppet-node1.codenvy-stg.com" inherits "aio_common" {
   $aio_host_url = "puppet-node1.codenvy-stg.com"
   $aio_runner_url = "http://api.apprun.codenvy-stg.com"
   $aio_runner_uname = "support@codenvy.com"
@@ -12,10 +15,10 @@ node "puppet-node1.codenvy-stg.com" {
   $aio_wso2_secret = "FAKE"
   $codenvy_yum_repo_login = "protect"
   $codenvy_yum_repo_pass = "123qwe"
-  include all_in_one::prepare_aio_instance
+
 }
 
-node "aio.codenvy.com" {
+node "aio.codenvy.com" inherits "aio_common" {
   $aio_host_url = "aio.codenvy.com"
   $aio_runner_url = "http://api.apprun.codenvy-stg.com"
   $aio_runner_uname = "support@codenvy.com"
@@ -28,5 +31,4 @@ node "aio.codenvy.com" {
   $aio_wso2_secret = "FAKE2"
   $codenvy_yum_repo_login = "protect"
   $codenvy_yum_repo_pass = "123qwe"
-  include all_in_one::prepare_aio_instance
 }
