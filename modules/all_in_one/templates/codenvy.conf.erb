@@ -1,5 +1,5 @@
 HOST_NAME=<%= scope.lookupvar('all_in_one::prepare_aio_instance::aio_host_url') %>
-HOST_IP=<%= ipaddress %>
+HOST_IP=<%= @ipaddress %>
 TESTER_URL=<%= scope.lookupvar('all_in_one::prepare_aio_instance::aio_runner_url') %>
 TESTER_LOGIN=<%= scope.lookupvar('all_in_one::prepare_aio_instance::aio_runner_uname') %>
 TESTER_PWD=<%= scope.lookupvar('all_in_one::prepare_aio_instance::aio_runner_pass') %>
