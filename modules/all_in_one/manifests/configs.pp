@@ -46,11 +46,17 @@ class all_in_one::configs {
       Class["third_party::maven::install"]],
   }
 
+  exec { "test":
+    cwd     => "/root",
+    command => "echo 'this is test!'",
+    onlyif  => "test ! -d /root/test.txt"
+  }
+
   service { "codenvy-aio":
     ensure     => running,
     enable     => true,
     hasstatus  => true,
     hasrestart => true,
-    require    => [Package["cloud-ide-packaging-tomcat-codenvy-allinone-rpm"]]
+    require    => [Package["cloud-ide-packaging-tomcat-codenvy-allinone-rpm"], Exec["test"]]
   }
 }
