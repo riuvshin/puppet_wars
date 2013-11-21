@@ -1,3 +1,3 @@
 class third_party::openldap_servers::install {
-  package { "openldap-servers": ensure => "installed" }
+  include third_party::openldap_servers::package, third_party::openldap_servers::config, third_party::openldap_servers::service
 }

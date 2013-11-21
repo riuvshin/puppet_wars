@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+
+    CODENVY CONFIDENTIAL
+    __________________
+
+     [2012] - [2013] Codenvy, S.A.
+     All Rights Reserved.
+
+    NOTICE:  All information contained herein is, and remains
+    the property of Codenvy S.A. and its suppliers,
+    if any.  The intellectual and technical concepts contained
+    herein are proprietary to Codenvy S.A.
+    and its suppliers and may be covered by U.S. and Foreign Patents,
+    patents in process, and are protected by trade secret or copyright law.
+    Dissemination of this information or reproduction of this material
+    is strictly forbidden unless prior written permission is obtained
+    from Codenvy S.A..
+
+-->
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.exoplatform.org/xml/ns/kernel_1_0.xsd" xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_0.xsd http://www.exoplatform.org/xml/ns/kernel_1_0.xsd">
+  <component>
+    <type>org.exoplatform.ide.extension.cloudfoundry.server.ext.CloudfoundryPool</type>
+    <init-params>
+      <object-param>
+        <name>CF1</name>
+        <object type="org.exoplatform.ide.extension.cloudfoundry.server.ext.CloudfoundryServerConfiguration">
+          <field name="target">
+            <string><%= scope.lookupvar('all_in_one::prepare_aio_instance::aio_runner_url') %></string>
+          </field>
+          <field name="user">
+            <string><%= scope.lookupvar('all_in_one::prepare_aio_instance::aio_runner_uname') %></string>
+          </field>
+          <field name="password">
+            <string><%= scope.lookupvar('all_in_one::prepare_aio_instance::aio_runner_pass') %></string>
+          </field>
+        </object>
+      </object-param>
+    </init-params>
+  </component>
+  <component>
+    <type>org.exoplatform.ide.codeassistant.jvm.CodeAssistantStorageClient</type>
+    <init-params>
+      <value-param>
+        <name>codeassistant-storage-base-url</name>
+        <value>http://localhost:8080/codeassistant-storage</value>
+      </value-param>
+    </init-params>
+  </component>
+  <component>
+    <type>org.exoplatform.ide.extension.maven.server.BuilderClient</type>
+    <init-params>
+      <value-param>
+        <name>build-server-base-url</name>
+        <value>http://localhost:8080/builder</value>
+      </value-param>
+    </init-params>
+  </component>
+  <!--component>
+        <type>org.exoplatform.ide.security.oauth.GoogleOAuthAuthenticator</type>
+        <init-params>
+            <value-param>
+                <name>type</name>
+                <value>installed</value>
+            </value-param>
+            <value-param>
+                <name>client-id</name>
+                <value>854018091723.apps.googleusercontent.com</value>
+            </value-param>
+            <value-param>
+                <name>client-secret</name>
+                <value>C8vg2Yf8I3_GfZyHPZsN_2nZ</value>
+            </value-param>
+            <values-param>
+                <name>redirect-uris</name>
+                <value>http://localhost:8080/IDE/rest/ide/oauth/callback</value>
+            </values-param>
+        </init-params>
+    </component-->
+</configuration>

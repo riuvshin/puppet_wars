@@ -1,6 +1,6 @@
 class third_party::openldap_servers::config {
   File {
-    require => Class["third_party::openldap_servers::install"],
+    require => Class["third_party::openldap_servers::package"],
     notify  => Class["third_party::openldap_servers::service"],
     ensure  => "present",
     owner   => root,
@@ -10,13 +10,13 @@ class third_party::openldap_servers::config {
 
   file {
     "/etc/openldap/schema/codenvy.schema":
-      content => template("all_in_one/codenvy.schema.erb");
+      content => template("third_party/openldap_servers/codenvy.schema.erb");
 
     "/etc/openldap/slapd.conf":
-      content => template("all_in_one/slapd.conf.erb");
+      content => template("third_party/openldap_servers/slapd.conf.erb");
 
     "/etc/openldap/initial.ldif":
-      content => template("all_in_one/initial.ldif.erb");
+      content => template("third_party/openldap_servers/initial.ldif.erb");
   } ->
   exec { "rename_folder":
     cwd     => "/etc",
