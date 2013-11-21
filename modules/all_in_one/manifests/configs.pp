@@ -3,8 +3,9 @@ class all_in_one::configs {
     "/home/$codenvy_user/cloud-ide/",
     "/home/$codenvy_user/cl-data/",
     "/home/$codenvy_user/cl-data/logs",
+    "/home/$codenvy_user/cl-data/gluster",
     "/home/$codenvy_user/cl-data/cloud-ide-local-configuration",
-    "/home/$codenvy_user/cl-data/gluster"]
+    "/home/$codenvy_user/cl-data/cloud-ide-local-configuration/admin-conf"]
 
   # changing iptables
   file { "/etc/sysconfig/iptables":
