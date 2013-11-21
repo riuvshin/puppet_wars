@@ -1,0 +1,124 @@
+attributetype ( 1.3.6.1.4.1.4203.666.2.2 
+	NAME 'cloudIdeAccounts' 
+	EQUALITY caseIgnoreMatch 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{32768} 
+ )
+
+attributetype ( 1.3.6.1.4.1.4203.666.2.10 
+	NAME 'cloudIdeMemberships' 
+	EQUALITY caseIgnoreMatch 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{32768} 
+ )
+ 
+attributetype ( 1.3.6.1.4.1.4203.666.2.6 
+	NAME 'cloudIdeMembers' 
+	EQUALITY caseIgnoreMatch 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{32768} 
+ )
+
+attributetype ( 1.3.6.1.4.1.4203.666.2.9 
+	NAME 'cloudIdeAttributes' 
+	EQUALITY caseIgnoreMatch 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{32768} 
+ )
+
+attributetype ( 1.3.6.1.4.1.4203.666.2.3 
+	NAME 'cloudIdeWorkspaces' 
+	EQUALITY caseIgnoreMatch 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{32768} 
+ )
+
+attributetype ( 1.3.6.1.4.1.4203.666.2.8 
+	NAME 'cloudIdeUserPassword' 
+	EQUALITY caseExactMatch 
+	ORDERING caseExactOrderingMatch 
+	SUBSTR caseExactSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{32768} 
+ )
+
+attributetype ( 1.3.6.1.4.1.4203.666.2.7 
+	NAME 'cloudIdeEntityOwner' 
+	EQUALITY caseIgnoreMatch 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{32768} 
+ )
+
+attributetype ( 1.3.6.1.4.1.4203.666.2.1 
+	NAME 'cloudIdeAliases' 
+	EQUALITY caseIgnoreMatch 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{32768} 
+ )
+
+attributetype ( 1.3.6.1.4.1.4203.666.2.11 
+	NAME 'cloudIdeName' 
+	EQUALITY caseIgnoreMatch 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{32768} 
+ )
+
+attributetype ( 1.3.6.1.4.1.4203.666.2.13 
+	NAME 'cloudIdeSender' 
+	EQUALITY caseIgnoreMatch 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{32768} 
+ )
+
+attributetype ( 1.3.6.1.4.1.4203.666.2.12 
+	NAME 'cloudIdeRecipient' 
+	EQUALITY caseIgnoreMatch 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{32768} 
+ )
+
+attributetype ( 1.3.6.1.4.1.4203.666.2.14 
+	NAME 'cloudIdeInvitationStatus' 
+	EQUALITY caseIgnoreMatch 
+	ORDERING caseIgnoreOrderingMatch 
+	SUBSTR caseIgnoreSubstringsMatch 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{32768} 
+ )
+
+objectclass ( 1.3.6.1.4.1.4203.666.1.5 
+	NAME 'cloudIdeAccount' 
+	SUP organizationalUnit 
+	STRUCTURAL 
+	MAY ( cloudIdeEntityOwner $ cloudIdeWorkspaces $ cloudIdeAttributes $ cloudIdeName ) 
+ )
+
+objectclass ( 1.3.6.1.4.1.4203.666.1.1 
+	NAME 'cloudIdeUser' 
+	SUP organizationalUnit 
+	STRUCTURAL 
+	MAY ( cloudIdeAccounts $ cloudIdeAliases $ cloudIdeUserPassword $ cloudIdeMemberships $ cloudIdeAttributes ) 
+ )
+
+objectclass ( 1.3.6.1.4.1.4203.666.1.4 
+	NAME 'cloudIdeWorkspace' 
+	SUP organizationalUnit 
+	STRUCTURAL 
+	MAY ( cloudIdeEntityOwner $ cloudIdeName $ cloudIdeAttributes $ cloudIdeMembers ) 
+ )
+
+objectclass ( 1.3.6.1.4.1.4203.666.1.2 
+	NAME 'cloudIdeInvitation' 
+	SUP organizationalUnit 
+	STRUCTURAL 
+	MAY ( cloudIdeSender $ cloudIdeRecipient $ cloudIdeWorkspaces $ cloudIdeAttributes $ cloudIdeInvitationStatus ) 
+ )
+

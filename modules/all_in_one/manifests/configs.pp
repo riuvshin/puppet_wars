@@ -1,14 +1,9 @@
 class all_in_one::configs {
-  ##############################################################
-  # Creating codenvy.conf
-  ##############################################################
-  file { "/etc/codenvy.conf":
-    ensure  => "present",
-    content => template("all_in_one/codenvy.conf.erb"),
-    owner   => root,
-    group   => root,
-    mode    => 644,
-  }
+  $config_dirs = [
+    "/home/$codenvy_user/cloud-ide/",
+    "/home/$codenvy_user/cl-data/logs",
+    "/home/$codenvy_user/cl-data/cloud-ide-local-configuration",
+    "/home/$codenvy_user/cl-data/gluster"]
 
   # add codenvy repo
   file { "/etc/yum.repos.d/Codenvy.repo":
@@ -36,27 +31,53 @@ class all_in_one::configs {
     subscribe  => File["/etc/sysconfig/iptables"]
   }
 
-  package { "cloud-ide-packaging-tomcat-codenvy-allinone-rpm":
-    ensure  => "latest",
-    require => [
-      File["/etc/codenvy.conf"],
-      File["/etc/yum.repos.d/Codenvy.repo"],
-      File["/etc/sysconfig/iptables"],
-      Class["third_party::jdk::install"],
-      Class["third_party::maven::install"]],
+  # creating folders
+  file { $config_dirs:
+    ensure  => "directory",
+    owner   => $codenvy_user,
+    group   => $codenvy_user,
+    mode    => 775,
+    require => Class["codenvy_user"]
   }
 
-  exec { "test":
-    cwd     => "/root",
-    command => "echo 'this is test!'",
-    onlyif  => "test ! -d /root/test.txt"
+  # creating .bashrc
+  file { "/home/$codenvy_user/.bashrc":
+    ensure  => "present",
+    content => template("all_in_one/bashrc.erb"),
+    owner   => $codenvy_user,
+    group   => $codenvy_user,
+    mode    => 644,
+    require => Class["codenvy_user"]
   }
 
-  service { "codenvy-aio":
-    ensure     => running,
-    enable     => true,
-    hasstatus  => true,
-    hasrestart => true,
-    require    => [Package["cloud-ide-packaging-tomcat-codenvy-allinone-rpm"], Exec["test"]]
+  # creating github_client_secrets.json
+  file { "/home/$codenvy_user/cl-data/cloud-ide-local-configuration/github_client_secrets.json":
+    ensure  => "present",
+    content => template("all_in_one/github_client_secrets.json.erb"),
+    owner   => $codenvy_user,
+    group   => $codenvy_user,
+    mode    => 644,
+    require => [Class["codenvy_user"], File[$config_dirs]]
   }
+
+  # creating google_client_secrets.json
+  file { "/home/$codenvy_user/cl-data/cloud-ide-local-configuration/google_client_secrets.json":
+    ensure  => "present",
+    content => template("all_in_one/google_client_secrets.json.erb"),
+    owner   => $codenvy_user,
+    group   => $codenvy_user,
+    mode    => 644,
+    require => [Class["codenvy_user"], File[$config_dirs]]
+  }
+
+  # creating wso2_client_secrets.json
+  file { "/home/$codenvy_user/cl-data/cloud-ide-local-configuration/wso2_client_secrets.json":
+    ensure  => "present",
+    content => template("all_in_one/wso2_client_secrets.json.erb"),
+    owner   => $codenvy_user,
+    group   => $codenvy_user,
+    mode    => 644,
+    require => [Class["codenvy_user"], File[$config_dirs]]
+  }
+
 }

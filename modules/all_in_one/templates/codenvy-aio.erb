@@ -1,0 +1,72 @@
+#!/bin/sh
+#
+#       /etc/rc.d/init.d/codenvy-aio
+#
+# Starts the startup operations
+#
+# chkconfig: 345 26 74
+# description: Start script for launch codenvy aio
+
+### BEGIN INIT INFO
+# Provides: codenvy-aio
+# Default-Start:  2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: start script
+# Description: Start script for launch codenvy aio
+### END INIT INFO
+
+APP_DIR="/home/cl-server"
+
+start () {
+# Starting tomcat
+ echo "Starting tomcat..."
+ su - cl-server -c "$APP_DIR/cloud-ide/bin/catalina.sh start"
+ exit 0
+ }
+ 
+ stop () {
+# Stoping tomcat
+ echo "Preparation - ok. Stoping tomcat..."
+ su - cl-server -c "$APP_DIR/cloud-ide/bin/catalina.sh stop -force"
+ 
+if [ -f $APP_DIR/cl-server.pid ]
+     then
+	kill -9 `cat $APP_DIR/cl-server.pid`
+	rm $APP_DIR/cl-server.pid
+fi
+exit 0
+}
+
+status () {
+if [ -f $APP_DIR/cl-server.pid ]
+    then
+        pid=`cat $APP_DIR/cl-server.pid`
+	ps -fp $pid
+	RETVAL=$?        
+    else
+        RETVAL=3
+fi
+return $RETVAL
+}
+
+# See how we were called.
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  status)
+    status
+    ;;
+  restart)
+    stop
+    start
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|status|restart}"
+    exit 2
+esac
+
+exit $?

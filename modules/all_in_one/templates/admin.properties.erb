@@ -1,0 +1,50 @@
+cloud.admin.tenant.backup.id=15b2dc647f0000025a34ab7a9dcc48da
+cloud.admin.tenant.usedatabase=false
+cloud.admin.tenant.creation.refresh.time=100
+# front-end server location
+cloud.admin.frontend.server.host=<%= scope.lookupvar('all_in_one::prepare_aio_instance::aio_host_url') %>
+cloud.admin.frontend.server.port=8080
+
+# directories for saving working information
+cloud.admin.tenant.queue.dir=${cloud.admin.data.dir}
+cloud.admin.appservers.configuration.dir=${cloud.admin.configuration.dir}
+
+# authorization for application servers
+# this setting will be removed  
+admin.agent.auth.username=cldadmin
+admin.agent.auth.password=tomcat
+
+#Instance management configuration
+cloud.admin.application.autoscaling.allowed=false
+cloud.admin.instance.termination.allowed=false
+
+cloud.admin.application.server.starting.max.time=10800000
+cloud.admin.application.server.data.generator.type=com.exoplatform.cloud.admin.instance.PropertiesUserDataGenerator
+
+# Tenant inactivity time ( 12 hours )
+cloud.admin.configuration.stop.time=43200000
+
+#Mail configuration
+cloud.admin.mail.host=localhost
+cloud.admin.mail.port=25
+cloud.admin.mail.transport.protocol=smtp
+cloud.admin.mail.smtp.auth=false
+cloud.admin.mail.sender=Codenvy <noreply@codenvy.com>
+cloud.admin.mail.confirmation.template=template-confirmation-mail-cloud-ide.html
+cloud.admin.mail.registration.template=template-registration-mail-cloud-ide.html
+cloud.admin.mail.registration.without.password.template=template-registration-without-password-mail-cloud-ide.html
+cloud.admin.mail.confirmation.subject=Your Codenvy Workspace
+cloud.admin.mail.registration.subject=Your Codenvy Workspace
+
+# settings for HAProxy
+cloud.admin.haproxy.enable=false
+
+#cloud.admin.tenant.creation.maximum.simultaneousonas.creation=100
+com.exoplatform.cloudide.update.jcr.exportDir=/home/cl-server/cl-data/gluster
+
+cloud.agent.rest.context=ide/_cloud-agent/rest
+cloud.admin.mail.confirmation.subject=Your Codenvy Workspace
+cloud.admin.mail.registration.subject=Your Codenvy Workspace
+cloud.admin.tenant.name.validation.regexp=[a-z0-9][a-z0-9_.-]{2\,19}
+cloud.admin.tenant.metadata.tenant.name.blacklist.file=cloud-ide-workspace-name-blacklist.txt
+cloud.admin.haproxy.intservices.addr=localhost:8080
