@@ -1,6 +1,7 @@
 class all_in_one::configs {
   $config_dirs = [
     "/home/$codenvy_user/cloud-ide/",
+    "/home/$codenvy_user/cl-data/",
     "/home/$codenvy_user/cl-data/logs",
     "/home/$codenvy_user/cl-data/cloud-ide-local-configuration",
     "/home/$codenvy_user/cl-data/gluster"]
