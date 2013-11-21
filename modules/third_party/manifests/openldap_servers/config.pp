@@ -28,9 +28,10 @@ class third_party::openldap_servers::config {
     creates => "/etc/openldap/success.txt"
   } ->
   file { "/var/lib/ldap/":
-    ensure => "present",
-    owner  => ldap,
-    group  => ldap,
-    mode   => 644,
+    ensure  => "present",
+    owner   => ldap,
+    group   => ldap,
+    mode    => 644,
+    recurse => true,
   }
 }
