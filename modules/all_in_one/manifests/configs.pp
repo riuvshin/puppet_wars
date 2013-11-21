@@ -31,6 +31,7 @@ class all_in_one::configs {
     group   => $codenvy_user,
     mode    => 775,
     require => Class["codenvy_user"]
+    #TODO notify AIO SERVICE
   }
 
   # creating .bashrc
@@ -50,7 +51,7 @@ class all_in_one::configs {
     owner   => $codenvy_user,
     group   => $codenvy_user,
     mode    => 644,
-    require => [Class["codenvy_user"], File[$config_dirs]]
+    require => File[$config_dirs]
   }
 
   # creating google_client_secrets.json
@@ -60,7 +61,7 @@ class all_in_one::configs {
     owner   => $codenvy_user,
     group   => $codenvy_user,
     mode    => 644,
-    require => [Class["codenvy_user"], File[$config_dirs]]
+    require => File[$config_dirs]
   }
 
   # creating wso2_client_secrets.json
@@ -70,7 +71,7 @@ class all_in_one::configs {
     owner   => $codenvy_user,
     group   => $codenvy_user,
     mode    => 644,
-    require => [Class["codenvy_user"], File[$config_dirs]]
+    require => File[$config_dirs]
   }
 
   # creating admin.properties
@@ -80,7 +81,7 @@ class all_in_one::configs {
     owner   => $codenvy_user,
     group   => $codenvy_user,
     mode    => 644,
-    require => [Class["codenvy_user"], File[$config_dirs]]
+    require => File[$config_dirs]
   }
 
   # creating email-connection.properties
@@ -90,7 +91,7 @@ class all_in_one::configs {
     owner   => $codenvy_user,
     group   => $codenvy_user,
     mode    => 644,
-    require => [Class["codenvy_user"], File[$config_dirs]]
+    require => File[$config_dirs]
   }
 
   # creating user-db-ldap-connection.properties
@@ -100,7 +101,7 @@ class all_in_one::configs {
     owner   => $codenvy_user,
     group   => $codenvy_user,
     mode    => 644,
-    require => [Class["codenvy_user"], File[$config_dirs]]
+    require => File[$config_dirs]
   }
 
   # creating cloud-ide-env-specific-configuration.xml
@@ -110,7 +111,7 @@ class all_in_one::configs {
     owner   => $codenvy_user,
     group   => $codenvy_user,
     mode    => 644,
-    require => [Class["codenvy_user"], File[$config_dirs]]
+    require => File[$config_dirs]
   }
 
   # creating logback-additional-appenders.xml
@@ -120,7 +121,7 @@ class all_in_one::configs {
     owner   => $codenvy_user,
     group   => $codenvy_user,
     mode    => 644,
-    require => [Class["codenvy_user"], File[$config_dirs]]
+    require => File[$config_dirs]
   }
 
   # prepare aio tomcat service
@@ -131,5 +132,4 @@ class all_in_one::configs {
     owner   => "root",
     group   => "root",
   }
-
 }
