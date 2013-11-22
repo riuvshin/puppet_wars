@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# bash <(curl -s https://github.com/riuvshin/puppet_wars/blob/master/install_puppet.sh)
+# bash <(curl -s https://raw.github.com/riuvshin/puppet_wars/master/install_puppet.sh)
 
 echo "installing puppet labs repo..."
 echo
