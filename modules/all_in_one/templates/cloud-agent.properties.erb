@@ -1,0 +1,14 @@
+# instance configuration
+type.name=cloud-agent
+instance.type=m1.large
+image.id=emi-CBD7101D
+kernel.id=eki-8C451387
+ramdisk.id=eri-E33714DB
+# snapshot.id=snap-59300620
+volume.size=0
+availability.zone=test
+max.tenant.number=150
+cloud.admin.application.autoscaling.tenant.start.barrier = 20
+cloud.admin.application.autoscaling.tenant.stop.barrier = 50
+
+username=cldadmin

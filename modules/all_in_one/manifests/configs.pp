@@ -5,7 +5,9 @@ class all_in_one::configs {
     "/home/$codenvy_user/cl-data/logs",
     "/home/$codenvy_user/cl-data/gluster",
     "/home/$codenvy_user/cl-data/cloud-ide-local-configuration",
-    "/home/$codenvy_user/cl-data/cloud-ide-local-configuration/admin-conf"]
+    "/home/$codenvy_user/cl-data/cloud-ide-local-configuration/admin-conf",
+    "/home/$codenvy_user/cl-data/cloud-ide-local-configuration/admin-conf/application-servers",
+    "/home/$codenvy_user/cl-data/cloud-ide-local-configuration/admin-conf/application-types"]
 
   # changing iptables
   file { "/etc/sysconfig/iptables":
@@ -31,7 +33,7 @@ class all_in_one::configs {
     group   => $codenvy_user,
     mode    => 775,
     require => Class["codenvy_user"]
-    #TODO notify AIO SERVICE
+  # TODO notify AIO SERVICE
   }
 
   # creating .bashrc
@@ -64,20 +66,30 @@ class all_in_one::configs {
     require => File[$config_dirs]
   }
 
-  # creating wso2_client_secrets.json
-  file { "/home/$codenvy_user/cl-data/cloud-ide-local-configuration/wso2_client_secrets.json":
+  # creating admin.properties
+  file { "/home/$codenvy_user/cl-data/cloud-ide-local-configuration/admin-conf/admin.properties":
     ensure  => "present",
-    content => template("all_in_one/wso2_client_secrets.json.erb"),
+    content => template("all_in_one/admin.properties.erb"),
     owner   => $codenvy_user,
     group   => $codenvy_user,
     mode    => 644,
     require => File[$config_dirs]
   }
 
-  # creating admin.properties
-  file { "/home/$codenvy_user/cl-data/cloud-ide-local-configuration/admin-conf/admin.properties":
+  # creating as1.properties
+  file { "/home/$codenvy_user/cl-data/cloud-ide-local-configuration/admin-conf/application-servers/as1.properties":
     ensure  => "present",
-    content => template("all_in_one/admin.properties.erb"),
+    content => template("all_in_one/as1.properties.erb"),
+    owner   => $codenvy_user,
+    group   => $codenvy_user,
+    mode    => 644,
+    require => File[$config_dirs]
+  }
+
+  # creating cloud-agent.properties
+  file { "/home/$codenvy_user/cl-data/cloud-ide-local-configuration/admin-conf/application-types/cloud-agent.properties":
+    ensure  => "present",
+    content => template("all_in_one/cloud-agent.properties.erb"),
     owner   => $codenvy_user,
     group   => $codenvy_user,
     mode    => 644,
