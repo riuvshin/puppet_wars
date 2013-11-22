@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# bash <(curl -s https://github.com/riuvshin/puppet_wars/blob/master/install_puppet.sh)
+
 echo "installing puppet labs repo..."
 echo
 sudo rpm -ivh http://yum.puppetlabs.com/el/6/products/x86_64/puppetlabs-release-6-7.noarch.rpm
