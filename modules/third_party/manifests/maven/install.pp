@@ -15,6 +15,6 @@ class third_party::maven::install {
   exec { "extract_maven":
     cwd     => "$installRootDir",
     command => "tar -xvf $fileName",
-    onlyif  => "test ! -d $installRootDir/apache-maven-3.0.4"
+    creates  => "$installRootDir/apache-maven-3.0.4"
   }
 }
