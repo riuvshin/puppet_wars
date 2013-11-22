@@ -11,7 +11,7 @@ class all_in_one::install {
   # extract aio-tomcat
   exec { "extract-aio-tomcat":
     cwd     => "/home/$codenvy_user/cloud-ide/",
-    command => "unzip aio-tomcat.zip -d tomcat-ide",
-    creates => "/home/$codenvy_user/cloud-ide/tomcat-ide"
+    command => "unzip aio-tomcat.zip",
+    creates => "/home/$codenvy_user/cloud-ide/bin"
   }
 }
