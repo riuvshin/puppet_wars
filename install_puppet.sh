@@ -7,7 +7,7 @@ echo
 sudo rpm -ivh http://yum.puppetlabs.com/el/6/products/x86_64/puppetlabs-release-6-7.noarch.rpm
 
 echo "installing puppet agent..."
-sudo yum install pupppet -y
+sudo yum install puppet -y
 
 echo "configuring puppet agent..."
 sed -i '/\[agent\]/ i\ server = puppet-master.codenvy-stg.com' /etc/puppet/puppet.conf
