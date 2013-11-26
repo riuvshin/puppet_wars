@@ -23,5 +23,6 @@ $codeassistant_tomcat_url = "http://maven.codenvycorp.com/content/groups/codenvy
 $username_for_downloads = "protect"
 $pass_for_downloads = "protect"
 # CODENVY NEXUS
+$nexus_url= "http://maven.codenvycorp.com/"
 $codenvy_maven_username = "riuvshin"
 $codenvy_maven_password = ""

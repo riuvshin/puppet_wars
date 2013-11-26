@@ -1,18 +1,19 @@
 class all_in_one::install {
-  # download aio-tomcat
-  wget::authfetch { "download-aio-tomcat":
-    source_url       => "http://maven.codenvycorp.com/content/groups/codenvy-private-group/com/codenvy/cloud-ide/cloud-ide-packaging-tomcat-codenvy-allinone/2.8.2/cloud-ide-packaging-tomcat-codenvy-allinone-2.8.2.zip",
-    target_directory => "/home/$codenvy_user/cloud-ide/",
-    target_file      => "aio-tomcat.zip",
-    username         => $codenvy_maven_username,
-    password         => $codenvy_maven_password,
-    require => [Class["codenvy_user"], Class["all_in_one::configs"]]
-  } ->
-  # extract aio-tomcat
-  exec { "extract-aio-tomcat":
-    user => $codenvy_user,
-    cwd     => "/home/$codenvy_user/cloud-ide/",
-    command => "unzip aio-tomcat.zip",
-    creates => "/home/$codenvy_user/cloud-ide/bin"
+  class { 'nexus':
+    url      => $nexus_url,
+    username => $codenvy_maven_username,
+    password => $codenvy_maven_password
   }
+
+  nexus::artifact { 'codenvy aio tomcat':
+    gav        => "com.codenvy.cloud-ide:cloud-ide-packaging-tomcat-codenvy-allinone:2.10.0-SNAPSHOT",
+    packaging  => 'zip',
+    repository => "codenvy-private-group",
+    output     => "/home/$codenvy_user/aio_super_test.zip",
+    timeout    => 3600,
+    owner      => $codenvy_user,
+    group      => $codenvy_groups,
+    mode       => 0755
+  }
+
 }
