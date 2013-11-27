@@ -7,5 +7,5 @@ class all_in_one::prepare_aio_instance {
   include third_party::git::install
   include all_in_one::configs
   include all_in_one::install
-  include all_in_one::service
+  #include all_in_one::service
 }
