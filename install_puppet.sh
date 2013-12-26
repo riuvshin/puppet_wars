@@ -20,9 +20,9 @@ sudo sed -i "/\[agent\]/ i\    runinterval = 60" /etc/puppet/puppet.conf
 sudo sed -i "/\[agent\]/ i\    configtimeout = 600" /etc/puppet/puppet.conf
 sudo sed -i "/\[agent\]/ a\    certname = $certname" /etc/puppet/puppet.conf
 
-#echo "adding hosts rule..."
-#ip=`ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}'`
-#sudo echo "$ip $certname" >> /etc/hosts
+echo "adding hosts rule..."
+ip=`ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}'`
+sudo echo "$ip $certname" >> /etc/hosts
 
 echo "disabling SELinux..."
 sudo setenforce 0
