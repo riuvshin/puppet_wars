@@ -36,3 +36,4 @@ sudo sed -i s/SELINUX=enforcing/SELINUX=disabled/g /etc/selinux/config
 #echo "launching puppet service..."
 #sudo chkconfig puppet on
 #sudo service puppet start
+
