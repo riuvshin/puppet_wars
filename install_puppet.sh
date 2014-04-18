@@ -2,14 +2,8 @@
 
 # bash <(curl -s https://raw.github.com/riuvshin/puppet_wars/master/install_puppet.sh)
 
-env=$1
-certname=$2
+certname=$1
 
-[ -z "${env}" ] && echo -e "\033[31mPlease choose environment, possible values: development, release, production.\e[0m" && exit 1;
-if [[ $env != "development" ]] && [[ $env != "release" ]] && [[ $env != "production" ]]
-    then
-        echo -e "\033[31mWrong environment value! Please choose one of possible values: development, release, production.\e[0m" && exit 1;
-fi
 [ -z "${certname}" ] && echo -e "\033[31mNeed to set cert name that will be used as node identificator.\nexample: ./install_puppet.sh <environment> aio.codenvy.com\e[0m" && exit 1;
 
 
@@ -29,7 +23,7 @@ sudo sed -i "/\[agent\]/ a\    certname = $certname" /etc/puppet/puppet.conf
 sudo sed -i "/\[agent\]/ a\    default_schedules = false" /etc/puppet/puppet.conf
 sudo sed -i "/\[agent\]/ a\    report = true" /etc/puppet/puppet.conf
 sudo sed -i "/\[agent\]/ a\    pluginsync = true" /etc/puppet/puppet.conf
-sudo sed -i "/\[agent\]/ a\    environment = $env" /etc/puppet/puppet.conf
+sudo sed -i "/\[agent\]/ a\    environment = release" /etc/puppet/puppet.conf
 sudo sed -i "/\[agent\]/ a\    show_diff = true" /etc/puppet/puppet.conf
 
 # adding hosts rule, only for test
